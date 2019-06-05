@@ -7,7 +7,7 @@ public class Rect {
     public double x;
     public double y;
     public double width;
-    public double length;
+    public double height;
     private Vector2[] rect;
     /*
     double[][] rect works like this
@@ -24,7 +24,7 @@ public class Rect {
         x = 0;
         y = 0;
         width = 0;
-        length = 0;
+        height = 0;
         rect = new Vector2[2];
         updateRect();
     }
@@ -33,7 +33,7 @@ public class Rect {
         this.x = x;
         this.y = y;
         this.width = width;
-        this.length = length;
+        this.height = length;
         rect = new Vector2[2];
         updateRect();
     }
@@ -42,7 +42,7 @@ public class Rect {
         this.x = p1.x;
         this.y = p1.y;
         this.width = p2.x;
-        this.length = p2.y;
+        this.height = p2.y;
         rect = new Vector2[2];
         updateRect();
     }
@@ -51,11 +51,18 @@ public class Rect {
         rect[0].x = x;
         rect[0].y = y;
         rect[1].x = x + width;
-        rect[1].y = y + length;
+        rect[1].y = y + height;
     }
 
     public Vector2[] getRect() {
         updateRect();
         return rect;
+    }
+
+    public boolean isIn(int x, int y){
+        if (x > this.x && x < rect[1].x && y > this.y && y < rect[1].y){
+            return true;
+        }
+        return false;
     }
 }

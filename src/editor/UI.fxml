@@ -9,13 +9,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.BuilderController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Options">
             <items>
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Clear" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -35,14 +36,16 @@
    <right>
       <VBox prefHeight="695.0" prefWidth="278.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="620.0" prefWidth="406.0" />
-            <TextField promptText="FileName" />
-            <TextField prefHeight="25.0" prefWidth="101.0" promptText="Width" />
-            <TextField promptText="Height" />
+            <ListView fx:id="tileList" prefHeight="620.0" prefWidth="406.0" />
+            <TextField fx:id="fileName" promptText="FileName" />
+            <TextField fx:id="tileWidth" prefHeight="25.0" prefWidth="101.0" promptText="Tile Width" />
+            <TextField fx:id="tileHeight" promptText="Tile Height" />
+            <TextField fx:id="mapWidth" promptText="Map Width (In # of tiles)" />
+            <TextField fx:id="mapHeight" promptText="Map Height (In # of tiles)" />
          </children>
       </VBox>
    </right>
    <center>
-      <Canvas height="697.0" width="1003.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="697.0" width="1003.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
