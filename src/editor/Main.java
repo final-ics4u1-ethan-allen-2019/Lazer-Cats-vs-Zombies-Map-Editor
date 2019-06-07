@@ -19,5 +19,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         mainStage = primaryStage;
+        BuilderController controller = loader.getController();
+        controller.programStart();
     }
 }

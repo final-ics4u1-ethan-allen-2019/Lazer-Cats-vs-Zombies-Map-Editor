@@ -26,6 +26,8 @@ public class Rect {
         width = 0;
         height = 0;
         rect = new Vector2[2];
+        rect[0] = new Vector2();
+        rect[1] = new Vector2();
         updateRect();
     }
 
@@ -34,7 +36,9 @@ public class Rect {
         this.y = y;
         this.width = width;
         this.height = length;
-        rect = new Vector2[2];
+        this.rect = new Vector2[2];
+        rect[0] = new Vector2();
+        rect[1] = new Vector2();
         updateRect();
     }
 
@@ -44,6 +48,8 @@ public class Rect {
         this.width = p2.x;
         this.height = p2.y;
         rect = new Vector2[2];
+        rect[0] = new Vector2();
+        rect[1] = new Vector2();
         updateRect();
     }
 

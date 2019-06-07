@@ -46,6 +46,6 @@
       </VBox>
    </right>
    <center>
-      <Canvas fx:id="canvas" height="697.0" width="1003.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" focusTraversable="true" height="700.0" width="1000.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

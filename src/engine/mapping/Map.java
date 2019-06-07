@@ -1,6 +1,7 @@
 package engine.mapping;
 
 import engine.GameObject;
+import javafx.scene.image.Image;
 
 public class Map extends GameObject {
 
@@ -15,13 +16,20 @@ public class Map extends GameObject {
         if (map != null) {
             tileMap = map;
             this.mapData = mapData;
-            tileMap[0][0].getRect().width = tileWidth;
+            tileWidth = (int)tileMap[0][0].getRect().width;
+            tileHeight = (int)tileMap[0][0].getRect().height;
+            mapWidth = tileMap[0].length;
+            mapHeight = tileMap.length;
         }
     }
 
     public Map(){
         tileMap = null;
         mapData = null;
+        tileWidth = 32;
+        tileHeight = 32;
+        mapHeight = 32;
+        mapWidth = 32;
     }
 
     public Map(int mapWidth, int mapHeight){
@@ -31,8 +39,24 @@ public class Map extends GameObject {
         this.tileHeight = 32;
     }
 
+    public Map(int tileWidth, int tileHeight, int mapWidth, int mapHeight){
+        this.mapWidth = mapWidth;
+        this.mapHeight = mapHeight;
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
+    }
+
     public Map(String mapData){
         this.mapData = mapData;
+    }
+
+    public void fill(Image img){
+        tileMap = new Tile[tileHeight][tileWidth];
+        for (int y = 0; y < tileMap.length; y++){
+            for (int x = 0; x < tileMap[y].length; x++){
+                tileMap[y][x] = new Tile(img, tileWidth * x, tileHeight * y, tileWidth, tileHeight);
+            }
+        }
     }
 
     @Override

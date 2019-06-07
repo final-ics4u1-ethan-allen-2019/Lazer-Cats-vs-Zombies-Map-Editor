@@ -28,7 +28,7 @@ public class Tile extends GameObject {
         this.rect = rect;
     }
 
-    public Tile(Image img, int x, int y, int width, int height){
+    public Tile(Image img, double x, double y, double width, double height){
         super();
         this.img = img;
         this.rect = new Rect(x, y, width, height);
