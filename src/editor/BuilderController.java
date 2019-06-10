@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -34,6 +35,18 @@ public class BuilderController {
 
     @FXML
     TextField fileName;
+
+    @FXML
+    TextField mapHeight;
+
+    @FXML
+    TextField mapWidth;
+
+    @FXML
+    TextField tileHeight;
+
+    @FXML
+    TextField tileWidth;
 
     EditorMap eMap;
 
@@ -60,6 +73,8 @@ public class BuilderController {
             public void handle(MouseEvent event) {
                 BuilderController.x = event.getX();
                 BuilderController.y = event.getY();
+                int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
+                eMap.setTile(selected, tileIndex[1], tileIndex[0]);
             }
         });
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -94,7 +109,7 @@ public class BuilderController {
         gc = canvas.getGraphicsContext2D();
 
 
-        eMap.fill(BackgroundTiles.WATER_INVERSE_HOLE_BOTTOM_LEFT);
+        eMap.fill(BackgroundTiles.WATER_TILE_0);
 
         new AnimationTimer() {
 
@@ -141,7 +156,43 @@ public class BuilderController {
                 else
                     System.out.print("Enter A File Name");
                 break;
+            case "Clear":
+                eMap.fill(BackgroundTiles.WATER_TILE_0);
+                break;
         }
     }
 
+    public void fieldKeyHandler(KeyEvent k){
+        TextField target = (TextField) k.getTarget();
+
+        if (k.getCode() == KeyCode.ENTER) {
+            switch (target.getId()) {
+                case "mapWidth":
+                    if (!mapWidth.getText().equals("")) {
+                        eMap.setMapWidth(Integer.parseInt(mapWidth.getText()));
+                        mapWidth.clear();
+                    }
+                    break;
+                case "mapHeight":
+                    if (!mapHeight.getText().equals("")) {
+                        eMap.setMapHeight(Integer.parseInt(mapHeight.getText()));
+                        mapHeight.clear();
+                    }
+                    break;
+                case "tileWidth":
+                    if (!tileWidth.getText().equals("")) {
+                        eMap.setTileWidth(Integer.parseInt(tileWidth.getText()));
+                        tileWidth.clear();
+                    }
+                    break;
+                case "tileHeight":
+                    if (!tileHeight.getText().equals("")) {
+                        eMap.setTileHeight(Integer.parseInt(tileHeight.getText()));
+                        tileHeight.clear();
+                    }
+                    break;
+            }
+            eMap.fill(BackgroundTiles.WATER_TILE_0);
+        }
+    }
 }

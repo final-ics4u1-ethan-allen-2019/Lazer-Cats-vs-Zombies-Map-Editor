@@ -23,9 +23,9 @@ public class EditorMap extends DynamicMap {
 
     public void fill(TextureClassifier.BackgroundTiles tile){
         tileMap = new ArrayList<>();
-        for (int y = 0; y < tileHeight; y++){
+        for (int y = 0; y < mapHeight; y++){
             addRow();
-            for (int x = 0; x < tileWidth; x++){
+            for (int x = 0; x < mapWidth; x++){
                 addTile(new EditorTile(tile, x* tileWidth, y *tileHeight, tileWidth, tileHeight ));
             }
         }
@@ -89,6 +89,7 @@ public class EditorMap extends DynamicMap {
             System.out.print("file could not");
         }
     }
+
 
 
     @Override
