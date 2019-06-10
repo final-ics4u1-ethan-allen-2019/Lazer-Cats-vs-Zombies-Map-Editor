@@ -65,8 +65,9 @@ public class Rect {
         return rect;
     }
 
-    public boolean isIn(int x, int y){
+    public boolean isIn(double x, double y){
         if (x > this.x && x < rect[1].x && y > this.y && y < rect[1].y){
+            System.out.println("X: " + this.x + "   Y: " + this.y + "   X2: " + rect[1].x + "   Y2: " + rect[1].y);
             return true;
         }
         return false;

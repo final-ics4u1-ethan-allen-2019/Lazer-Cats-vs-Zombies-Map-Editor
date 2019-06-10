@@ -39,6 +39,10 @@ public class Tile extends GameObject {
         Draw.drawImage(img, rect.x, rect.y, rect.width, rect.height);
     }
 
+    public void setImg(Image img) {
+        this.img = img;
+    }
+
     public Rect getRect(){
         return this.rect;
     }

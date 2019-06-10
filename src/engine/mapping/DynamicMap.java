@@ -14,7 +14,7 @@ public class DynamicMap extends Map {
 
     public DynamicMap(){
         super();
-        tileMap = null;
+        tileMap = new ArrayList<>();
     }
 
     public void addTile(Tile tile, int x, int y){
@@ -22,7 +22,7 @@ public class DynamicMap extends Map {
     }
 
     public void addTile(Tile tile){
-        if (tileMap == null){
+        if (tileMap.size() <= 1){
             addRow();
         }
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
