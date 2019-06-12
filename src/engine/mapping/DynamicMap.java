@@ -39,11 +39,11 @@ public class DynamicMap extends Map {
             addRow();
         }
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
-            tileMap.get(tileMap.size() - 1).add(new Tile(img, 0, 0, tileWidth, tileHeight));
+            tileMap.get(tileMap.size() - 1).add(new Tile(img, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
         } else{
             ArrayList<Tile> row = tileMap.get(tileMap.size() - 1);
             Rect lastTile = row.get(row.size() - 1).getRect();
-            tileMap.get(tileMap.size() - 1).add(new Tile(img, (int)(lastTile.x + tileWidth), (int)(lastTile.y + tileHeight), tileWidth, tileHeight));
+            tileMap.get(tileMap.size() - 1).add(new Tile(img, (int)(lastTile.x + tileWidth), (int)(lastTile.y), tileWidth, tileHeight));
         }
     }
 
