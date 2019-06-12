@@ -72,7 +72,7 @@ public class EditorMap extends DynamicMap {
     }
 
     public void saveMap(String name){
-        String text = "";
+        String text = new String();
         for (int y = 0; y < tileMap.size(); y++){
             String[] row = new String[tileMap.get(y).size()];
             for (int x = 0; x < tileMap.get(y).size(); x++){
