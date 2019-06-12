@@ -119,16 +119,16 @@ public class BuilderController {
 
 
                 if (KeyboardInput.isKeyDown(KeyCode.W)){
-                    cameraPos.y --;
+                    cameraPos.y -= 2;
                 }
                 else if (KeyboardInput.isKeyDown(KeyCode.S)){
-                    cameraPos.y ++;
+                    cameraPos.y += 2;
                 }
                 if (KeyboardInput.isKeyDown(KeyCode.A)){
-                    cameraPos.x --;
+                    cameraPos.x -= 2;
                 }
                 else if (KeyboardInput.isKeyDown(KeyCode.D)){
-                    cameraPos.x ++;
+                    cameraPos.x += 2;
                 }
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -192,7 +192,7 @@ public class BuilderController {
                     }
                     break;
             }
-            eMap.fill(BackgroundTiles.WATER_TILE_0);
+            eMap.fill(BackgroundTiles.LAVA_TILE_0);
         }
     }
 }
