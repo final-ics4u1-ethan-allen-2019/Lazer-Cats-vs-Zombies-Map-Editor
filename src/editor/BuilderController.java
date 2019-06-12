@@ -192,7 +192,7 @@ public class BuilderController {
                     }
                     break;
             }
-            eMap.fill(BackgroundTiles.LAVA_TILE_0);
+            eMap.fill(BackgroundTiles.BLACK_STONE_CENTER_MIDDLE);
         }
     }
 }

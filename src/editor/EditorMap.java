@@ -35,7 +35,6 @@ public class EditorMap extends DynamicMap {
         for (int row = 0; row < tileMap.size(); row ++){
             for (int col = 0; col < tileMap.get(row).size(); col++){
                 if (tileMap.get(row).get(col).click(x, y)){
-                    System.out.print(col);
                     return new int[] {row, col};
                 }
             }
@@ -60,7 +59,6 @@ public class EditorMap extends DynamicMap {
     @Override
     public void addRow(){
         tileMap.add(new ArrayList<EditorTile>());
-        System.out.print(tileMap.size() - 1);
     }
 
     public void setTile(TextureClassifier.BackgroundTiles tile, int x , int y){
