@@ -18,8 +18,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.security.Key;
+import java.util.ArrayList;
 
 public class BuilderController {
 
@@ -48,7 +52,12 @@ public class BuilderController {
     @FXML
     TextField tileWidth;
 
-    EditorMap eMap;
+    @FXML
+    MenuItem importFiles;
+
+    private EditorMap eMap;
+    private ArrayList<EditorMap> maps;
+
 
 
 
@@ -60,6 +69,7 @@ public class BuilderController {
     @FXML
     public void initialize(){
         tileList.getItems().addAll(BackgroundTiles.values());
+        maps = new ArrayList<>();
         canvas.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
             @Override
@@ -91,6 +101,17 @@ public class BuilderController {
             @Override
             public void handle(MouseEvent event) {
                 selected = (BackgroundTiles) tileList.getSelectionModel().getSelectedItem();
+            }
+        });
+
+        importFiles.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                FileChooser fc = new FileChooser();
+                File file = fc.showOpenDialog(stage);
+                maps.add(MapGenerator.generateEditorMap(file));
+                System.out.print(maps.size());
             }
         });
 
@@ -159,6 +180,7 @@ public class BuilderController {
             case "Clear":
                 eMap.fill(BackgroundTiles.WATER_TILE_0);
                 break;
+
         }
     }
 
@@ -194,5 +216,9 @@ public class BuilderController {
             }
             eMap.fill(BackgroundTiles.LAVA_TILE_0);
         }
+    }
+
+    private void openFileExplorer(){
+        FileChooser fc = new FileChooser();
     }
 }
