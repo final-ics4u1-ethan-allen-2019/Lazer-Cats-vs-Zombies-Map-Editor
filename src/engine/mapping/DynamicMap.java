@@ -12,6 +12,11 @@ public class DynamicMap extends Map {
         super(url);
     }
 
+    public DynamicMap( int tileWidth, int tileHeight, int mapWidth, int mapHeight){
+        super(tileWidth, tileHeight, mapWidth, mapHeight);
+        tileMap = new ArrayList<>();
+    }
+
     public DynamicMap(){
         super();
         tileMap = new ArrayList<>();
@@ -36,6 +41,9 @@ public class DynamicMap extends Map {
 
     public void addTile(Image img){
         if (tileMap == null){
+            tileMap = new ArrayList<>();
+            addRow();
+        } else if (tileMap.size() < 1){
             addRow();
         }
         if (tileMap.get(tileMap.size() - 1).size() == 0) {

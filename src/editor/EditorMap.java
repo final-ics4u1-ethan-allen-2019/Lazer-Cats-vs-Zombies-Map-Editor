@@ -17,6 +17,11 @@ public class EditorMap extends DynamicMap {
         super();
     }
 
+    EditorMap(int tileWidth, int tileHeight, int mapWidth, int mapHeight){
+        super(tileWidth, tileHeight, mapWidth, mapHeight);
+        tileMap = new ArrayList<>();
+    }
+
 
     //IDEALLY OVERRIDE WITH Tile Parameter
 
@@ -45,7 +50,7 @@ public class EditorMap extends DynamicMap {
 
     public void addTile(EditorTile tile){
         if (tileMap.size() <= 1){
-            addRow();
+            this.addRow();
         }
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
             tileMap.get(tileMap.size() - 1).add(tile);
@@ -76,7 +81,11 @@ public class EditorMap extends DynamicMap {
             for (int x = 0; x < tileMap.get(y).size(); x++){
                 row[x] = (Integer.toString(tileMap.get(y).get(x).getId()));
             }
-            text += (String.format((String.join(" ", row) + "%n")));
+            if (y != tileMap.size() - 1) {
+                text += (String.format((String.join(" ", row) + "%n")));
+            } else {
+                text += (String.format((String.join(" ", row))));
+            }
         }
         try {
             FileWriter writer = new FileWriter("maps/" + name + ".txt");
@@ -88,7 +97,22 @@ public class EditorMap extends DynamicMap {
         }
     }
 
-
+    @Override
+    public void addTile(Image img){
+        if (tileMap == null){
+            tileMap = new ArrayList<>();
+            addRow();
+        } else if (tileMap.size() < 1){
+            addRow();
+        }
+        if (tileMap.get(tileMap.size() - 1).size() == 0) {
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(img, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
+        } else{
+            ArrayList<EditorTile> row = tileMap.get(tileMap.size() - 1);
+            Rect lastTile = row.get(row.size() - 1).getRect();
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(img, (int)(lastTile.x + tileWidth), (int)(lastTile.y), tileWidth, tileHeight));
+        }
+    }
 
     @Override
     public void render(){  tileMap.forEach(tileList -> { tileList.forEach(tile -> {tile.render();}); }); }
