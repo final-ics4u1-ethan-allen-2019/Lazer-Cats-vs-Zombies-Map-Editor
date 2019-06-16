@@ -15,14 +15,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="Options">
             <items>
-                  <MenuItem onAction="#menuClickHandler" mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Clear" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuClickHandler" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuClickHandler" text="Clear" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -36,12 +36,12 @@
    <right>
       <VBox prefHeight="695.0" prefWidth="278.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView  fx:id="tileList" prefHeight="620.0" prefWidth="406.0" />
+            <ListView fx:id="tileList" prefHeight="620.0" prefWidth="406.0" />
             <TextField fx:id="fileName" promptText="FileName" />
-            <TextField onKeyPressed="#fieldKeyHandler" fx:id="tileWidth" prefHeight="25.0" prefWidth="101.0" promptText="Tile Width" />
-            <TextField onKeyPressed="#fieldKeyHandler" fx:id="tileHeight" promptText="Tile Height" />
-            <TextField onKeyPressed="#fieldKeyHandler" fx:id="mapWidth" promptText="Map Width (In # of tiles)" />
-            <TextField onKeyPressed="#fieldKeyHandler" fx:id="mapHeight" promptText="Map Height (In # of tiles)" />
+            <TextField fx:id="tileWidth" onKeyPressed="#fieldKeyHandler" prefHeight="25.0" prefWidth="101.0" promptText="Tile Width" />
+            <TextField fx:id="tileHeight" onKeyPressed="#fieldKeyHandler" promptText="Tile Height" />
+            <TextField fx:id="mapWidth" onKeyPressed="#fieldKeyHandler" promptText="Map Width (In # of tiles)" />
+            <TextField fx:id="mapHeight" onKeyPressed="#fieldKeyHandler" promptText="Map Height (In # of tiles)" />
          </children>
       </VBox>
    </right>
