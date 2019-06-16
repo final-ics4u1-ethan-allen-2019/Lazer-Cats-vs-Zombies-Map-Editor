@@ -9,8 +9,8 @@ import java.io.*;
 
 public class MapGenerator {
 
-    public static EditorMap generateEditorMap(File file){
-        EditorMap map = new EditorMap(32, 32, 100, 100);
+    public static EditorMap generateEditorMap(File file, int tileWidth, int tileHeight){
+        EditorMap map = new EditorMap(tileWidth, tileHeight, 100, 100);
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);

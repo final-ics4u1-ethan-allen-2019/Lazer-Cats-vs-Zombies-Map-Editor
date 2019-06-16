@@ -110,7 +110,7 @@ public class BuilderController {
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
                 File file = fc.showOpenDialog(stage);
-                maps.add(MapGenerator.generateEditorMap(file));
+                eMap = (MapGenerator.generateEditorMap(file, 32, 32));
                 System.out.print(maps.size());
             }
         });
@@ -153,6 +153,11 @@ public class BuilderController {
                 }
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                if (maps != null && maps.size() > 1){
+                    for (EditorMap map : maps){
+                        map.render();
+                    }
+                }
                 eMap.render();
                 gc.fillText((x + cameraPos.x) + "     " + (y + cameraPos.y), 100, 100);
                 gc.fillText(("Camera X: " + (cameraPos.x) + "     Camera Y:" + (cameraPos.y)), 150, 150);
