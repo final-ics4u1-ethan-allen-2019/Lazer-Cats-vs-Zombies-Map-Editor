@@ -111,6 +111,7 @@ public class BuilderController {
                 FileChooser fc = new FileChooser();
                 File file = fc.showOpenDialog(stage);
                 eMap = (MapGenerator.generateEditorMap(file, 32, 32));
+                fileName.setText(file.getName().replace(".txt", ""));
                 System.out.print(maps.size());
             }
         });

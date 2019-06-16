@@ -114,6 +114,23 @@ public class EditorMap extends DynamicMap {
         }
     }
 
+
+    public void addTile(TextureClassifier.BackgroundTiles tile){
+        if (tileMap == null){
+            tileMap = new ArrayList<>();
+            addRow();
+        } else if (tileMap.size() < 1){
+            addRow();
+        }
+        if (tileMap.get(tileMap.size() - 1).size() == 0) {
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(tile, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
+        } else{
+            ArrayList<EditorTile> row = tileMap.get(tileMap.size() - 1);
+            Rect lastTile = row.get(row.size() - 1).getRect();
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(tile, (int)(lastTile.x + tileWidth), (int)(lastTile.y), tileWidth, tileHeight));
+        }
+    }
+
     @Override
     public void render(){  tileMap.forEach(tileList -> { tileList.forEach(tile -> {tile.render();}); }); }
 
