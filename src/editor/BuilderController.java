@@ -186,7 +186,6 @@ public class BuilderController {
             case "Clear":
                 eMap.fill(BackgroundTiles.WATER_TILE_0);
                 break;
-
         }
     }
 
