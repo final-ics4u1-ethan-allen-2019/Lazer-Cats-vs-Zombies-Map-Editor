@@ -2,8 +2,6 @@ package editor;
 
 import engine.mapping.Tile;
 import images.TextureClassifier;
-import javafx.scene.canvas.GraphicsContext;
-import editor.BuilderController;
 import javafx.scene.image.Image;
 
 public class EditorTile extends Tile {

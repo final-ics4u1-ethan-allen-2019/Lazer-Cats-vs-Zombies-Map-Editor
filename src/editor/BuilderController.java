@@ -22,7 +22,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.security.Key;
 import java.util.ArrayList;
 
 public class BuilderController {
@@ -76,7 +75,6 @@ public class BuilderController {
         tileList.getItems().addAll(BackgroundTiles.values());
         maps = new ArrayList<>();
         canvas.setOnMouseMoved(new EventHandler<MouseEvent>() {
-
             @Override
             public void handle(MouseEvent event) {
                 BuilderController.x = event.getX();
@@ -90,7 +88,7 @@ public class BuilderController {
                 BuilderController.y = event.getY();
                 int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
                 try {
-                    eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                    eMap.setTile(selected, tileIndex[0], tileIndex[1]);
                 } catch (Exception e){
 
                 }
@@ -102,7 +100,7 @@ public class BuilderController {
                 BuilderController.x = event.getX();
                 BuilderController.y = event.getY();
                 int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
-                eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                eMap.setTile(selected, tileIndex[0], tileIndex[1]);
             }
         });
 
@@ -118,6 +116,7 @@ public class BuilderController {
             public void handle(ActionEvent event) {
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
+                fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt"));
                 File file = fc.showOpenDialog(stage);
                 if (file != null) {
                     eMap = (MapGenerator.generateEditorMap(file, 32, 32));
@@ -133,7 +132,7 @@ public class BuilderController {
                 FileChooser fc = new FileChooser();
                 File file = fc.showSaveDialog(stage);
                 if (file != null)
-                    savePath = file.getPath();
+                    savePath = file.getPath().replace(file.getName(), "");
             }
         });
 
@@ -145,7 +144,7 @@ public class BuilderController {
 
     public void programStart(){
 
-        cameraPos = new Vector2(400, 600);
+        cameraPos = new Vector2(0, 0);
 
         eMap = new EditorMap();
 
@@ -187,7 +186,7 @@ public class BuilderController {
                 gc.fillText(("Mouse X: " + (x) + "     Mouse Y:" + y), 200, 200);
                 int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
                 if(tileIndex != null) {
-                    Rect rect = eMap.getTileRect(tileIndex[1], tileIndex[0]);
+                    Rect rect = eMap.getTileRect(tileIndex[0], tileIndex[1]);
                     gc.setFill(Color.TRANSPARENT);
                     gc.strokeRect(rect.x - cameraPos.x, rect.y - cameraPos.y, rect.width, rect.height);
                 }
@@ -200,7 +199,7 @@ public class BuilderController {
         switch(target.getText()){
             case "Save" :
                 String name = fileName.getText();
-                if (fileName.getText() != "")
+                if (!fileName.getText().equals(""))
                     eMap.saveMap(fileName.getText());
                 else
                     System.out.print("Enter A File Name");

@@ -1,8 +1,5 @@
 package editor;
 
-import engine.mapping.DynamicMap;
-import engine.mapping.Map;
-import engine.mapping.Tile;
 import images.TextureClassifier.BackgroundTiles;
 
 import java.io.*;
@@ -19,12 +16,13 @@ public class MapGenerator {
             fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
             while ((line = reader.readLine()) != null){
+                if (line.equals("/n"))
+                    continue;
                 String[] txt = line.split(" ");
                 for (String s : txt){
 
                     for (BackgroundTiles b : BackgroundTiles.values()){
                         if (b.getId() == Integer.parseInt(s)){
-                            System.out.print(s + " ");
                             map.addTile(b);
                         }
                     }

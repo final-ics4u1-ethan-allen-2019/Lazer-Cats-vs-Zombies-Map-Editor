@@ -2,7 +2,6 @@ package editor;
 
 import engine.Rect;
 import engine.mapping.DynamicMap;
-import engine.mapping.Tile;
 import images.TextureClassifier;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -24,9 +23,6 @@ public class EditorMap extends DynamicMap {
         super(tileWidth, tileHeight, mapWidth, mapHeight);
         tileMap = new ArrayList<>();
     }
-
-
-    //IDEALLY OVERRIDE WITH Tile Parameter
 
 
     public void fill(TextureClassifier.BackgroundTiles tile){
@@ -52,9 +48,7 @@ public class EditorMap extends DynamicMap {
 
 
     public void addTile(EditorTile tile){
-        if (tileMap.size() <= 1){
-            this.addRow();
-        }
+        checkEmpty();
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
             tileMap.get(tileMap.size() - 1).add(tile);
         } else{
@@ -79,7 +73,6 @@ public class EditorMap extends DynamicMap {
 
     public void saveMap(String name){
         String text = new String();
-        text.replace("%n" , "");
         for (int y = 0; y < tileMap.size(); y++){
             String[] row = new String[tileMap.get(y).size()];
             for (int x = 0; x < tileMap.get(y).size(); x++){
@@ -91,8 +84,14 @@ public class EditorMap extends DynamicMap {
                 text += (String.format((String.join(" ", row))));
             }
         }
+
         try {
-            FileWriter writer = new FileWriter(BuilderController.savePath +".txt");
+            Stage stage = new Stage();
+            FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File(BuilderController.savePath));
+            fc.setInitialFileName(name);
+            File file = fc.showSaveDialog(stage);
+            FileWriter writer = new FileWriter(file.getPath() + ".txt");
             writer.write(text);
             writer.close();
 
@@ -103,12 +102,7 @@ public class EditorMap extends DynamicMap {
 
     @Override
     public void addTile(Image img){
-        if (tileMap == null){
-            tileMap = new ArrayList<>();
-            addRow();
-        } else if (tileMap.size() < 1){
-            addRow();
-        }
+        checkEmpty();
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
             tileMap.get(tileMap.size() - 1).add(new EditorTile(img, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
         } else{
@@ -120,12 +114,7 @@ public class EditorMap extends DynamicMap {
 
 
     public void addTile(TextureClassifier.BackgroundTiles tile){
-        if (tileMap == null){
-            tileMap = new ArrayList<>();
-            addRow();
-        } else if (tileMap.size() < 1){
-            addRow();
-        }
+        checkEmpty();
         if (tileMap.get(tileMap.size() - 1).size() == 0) {
             tileMap.get(tileMap.size() - 1).add(new EditorTile(tile, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
         } else{
@@ -137,5 +126,14 @@ public class EditorMap extends DynamicMap {
 
     @Override
     public void render(){  tileMap.forEach(tileList -> { tileList.forEach(tile -> {tile.render();}); }); }
+
+    private void checkEmpty(){
+        if (tileMap == null){
+            tileMap = new ArrayList<>();
+            addRow();
+        } else if (tileMap.size() < 1){
+            addRow();
+        }
+    }
 
 }
