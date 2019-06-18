@@ -55,6 +55,9 @@ public class BuilderController {
     @FXML
     MenuItem importFiles;
 
+    @FXML
+    MenuItem changeSavePath;
+
     private EditorMap eMap;
     private ArrayList<EditorMap> maps;
 
@@ -64,6 +67,8 @@ public class BuilderController {
     public static GraphicsContext gc;
     public static Vector2 cameraPos;
     public static KeyboardInput keyboardInput;
+    public static String savePath;
+
     private BackgroundTiles selected;
 
     @FXML
@@ -110,11 +115,23 @@ public class BuilderController {
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
                 File file = fc.showOpenDialog(stage);
-                eMap = (MapGenerator.generateEditorMap(file, 32, 32));
-                System.out.print(maps.size());
+                if (file != null)
+                    eMap = (MapGenerator.generateEditorMap(file, 32, 32));
             }
         });
 
+        changeSavePath.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                FileChooser fc = new FileChooser();
+                File file = fc.showSaveDialog(stage);
+                if (file != null)
+                    savePath = file.getPath();
+            }
+        });
+
+        savePath = "maps/";
         keyboardInput = new KeyboardInput();
         canvas.setOnKeyPressed(keyboardInput);
         canvas.setOnKeyReleased(keyboardInput);
@@ -223,7 +240,5 @@ public class BuilderController {
         }
     }
 
-    private void openFileExplorer(){
-        FileChooser fc = new FileChooser();
-    }
+
 }

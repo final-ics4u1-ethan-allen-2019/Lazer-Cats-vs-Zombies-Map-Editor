@@ -23,6 +23,7 @@
           <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import" />
+                  <MenuItem fx:id="changeSavePath" mnemonicParsing="false" text="Change Save Path" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

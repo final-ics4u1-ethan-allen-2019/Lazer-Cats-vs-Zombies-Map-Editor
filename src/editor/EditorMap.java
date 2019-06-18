@@ -5,6 +5,9 @@ import engine.mapping.DynamicMap;
 import engine.mapping.Tile;
 import images.TextureClassifier;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 import java.io.*;
 
 import java.util.ArrayList;
@@ -40,7 +43,6 @@ public class EditorMap extends DynamicMap {
         for (int row = 0; row < tileMap.size(); row ++){
             for (int col = 0; col < tileMap.get(row).size(); col++){
                 if (tileMap.get(row).get(col).click(x, y)){
-                    System.out.print(col);
                     return new int[] {row, col};
                 }
             }
@@ -65,7 +67,6 @@ public class EditorMap extends DynamicMap {
     @Override
     public void addRow(){
         this.tileMap.add(new ArrayList<EditorTile>());
-        System.out.print(tileMap.size() - 1);
     }
 
     public void setTile(TextureClassifier.BackgroundTiles tile, int x , int y){
@@ -78,15 +79,20 @@ public class EditorMap extends DynamicMap {
 
     public void saveMap(String name){
         String text = new String();
+        text.replace("%n" , "");
         for (int y = 0; y < tileMap.size(); y++){
             String[] row = new String[tileMap.get(y).size()];
             for (int x = 0; x < tileMap.get(y).size(); x++){
                 row[x] = (Integer.toString(tileMap.get(y).get(x).getId()));
             }
-            text += (String.format((String.join(" ", row) + "%n")));
+            if (y == tileMap.size() - 1) {
+                text += String.format((String.join(" ", row)));
+            } else {
+                text += (String.format((String.join(" ", row) + "%n")));
+            }
         }
         try {
-            FileWriter writer = new FileWriter("maps/" + name + ".txt");
+            FileWriter writer = new FileWriter(BuilderController.savePath +".txt");
             writer.write(text);
             writer.close();
 
