@@ -84,7 +84,11 @@ public class BuilderController {
                 BuilderController.x = event.getX();
                 BuilderController.y = event.getY();
                 int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
-                eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                try {
+                    eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                } catch (Exception e){
+
+                }
             }
         });
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {

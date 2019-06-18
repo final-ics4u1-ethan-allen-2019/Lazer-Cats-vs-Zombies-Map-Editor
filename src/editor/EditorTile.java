@@ -36,8 +36,10 @@ public class EditorTile extends Tile {
     }
 
     public void setTile(TextureClassifier.BackgroundTiles tile){
-        this.tile = tile;
-        this.img = tile.getImage();
+        if(tile != null) {
+            this.tile = tile;
+            this.img = tile.getImage();
+        }
     }
 
     public int getId(){
