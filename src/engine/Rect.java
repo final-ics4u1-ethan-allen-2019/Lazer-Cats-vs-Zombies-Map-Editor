@@ -71,4 +71,11 @@ public class Rect {
         }
         return false;
     }
+
+    public boolean isIn(Vector2 vector){
+        if (vector.x > this.x && vector.x < rect[1].x && vector.y > this.y && vector.y < rect[1].y){
+            return true;
+        }
+        return false;
+    }
 }

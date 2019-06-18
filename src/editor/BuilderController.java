@@ -89,7 +89,11 @@ public class BuilderController {
                 BuilderController.x = event.getX();
                 BuilderController.y = event.getY();
                 int[] tileIndex = eMap.getClickedTile(x + cameraPos.x, y + cameraPos.y);
-                eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                try {
+                    eMap.setTile(selected, tileIndex[1], tileIndex[0]);
+                } catch (Exception e){
+
+                }
             }
         });
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -115,8 +119,10 @@ public class BuilderController {
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
                 File file = fc.showOpenDialog(stage);
-                if (file != null)
+                if (file != null) {
                     eMap = (MapGenerator.generateEditorMap(file, 32, 32));
+                    fileName.setText(file.getName().replace(".txt", ""));
+                }
             }
         });
 
@@ -202,7 +208,6 @@ public class BuilderController {
             case "Clear":
                 eMap.fill(BackgroundTiles.WATER_TILE_0);
                 break;
-
         }
     }
 

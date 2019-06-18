@@ -43,7 +43,7 @@ public class EditorMap extends DynamicMap {
         for (int row = 0; row < tileMap.size(); row ++){
             for (int col = 0; col < tileMap.get(row).size(); col++){
                 if (tileMap.get(row).get(col).click(x, y)){
-                    return new int[] {row, col};
+                    return new int[] {col, row};
                 }
             }
         }
@@ -85,10 +85,10 @@ public class EditorMap extends DynamicMap {
             for (int x = 0; x < tileMap.get(y).size(); x++){
                 row[x] = (Integer.toString(tileMap.get(y).get(x).getId()));
             }
-            if (y == tileMap.size() - 1) {
-                text += String.format((String.join(" ", row)));
-            } else {
+            if (y != tileMap.size() - 1) {
                 text += (String.format((String.join(" ", row) + "%n")));
+            } else {
+                text += (String.format((String.join(" ", row))));
             }
         }
         try {
@@ -115,6 +115,23 @@ public class EditorMap extends DynamicMap {
             ArrayList<EditorTile> row = tileMap.get(tileMap.size() - 1);
             Rect lastTile = row.get(row.size() - 1).getRect();
             tileMap.get(tileMap.size() - 1).add(new EditorTile(img, (int)(lastTile.x + tileWidth), (int)(lastTile.y), tileWidth, tileHeight));
+        }
+    }
+
+
+    public void addTile(TextureClassifier.BackgroundTiles tile){
+        if (tileMap == null){
+            tileMap = new ArrayList<>();
+            addRow();
+        } else if (tileMap.size() < 1){
+            addRow();
+        }
+        if (tileMap.get(tileMap.size() - 1).size() == 0) {
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(tile, 0, tileHeight * (tileMap.size() - 1), tileWidth, tileHeight));
+        } else{
+            ArrayList<EditorTile> row = tileMap.get(tileMap.size() - 1);
+            Rect lastTile = row.get(row.size() - 1).getRect();
+            tileMap.get(tileMap.size() - 1).add(new EditorTile(tile, (int)(lastTile.x + tileWidth), (int)(lastTile.y), tileWidth, tileHeight));
         }
     }
 
