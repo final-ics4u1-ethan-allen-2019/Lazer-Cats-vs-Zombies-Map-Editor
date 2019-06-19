@@ -1,5 +1,19 @@
 package engine;
 
+/*
+    Project title: Lazer Cats vs Zombies Map Editor
+    -----------------------------------------------
+    ClassName: Cropper
+    -----------------------------------------------
+    What it does: Crops images
+    -----------------------------------------------
+    For: ICS4U1 - Holik
+    -----------------------------------------------
+    By: Ethan and Allen
+    -----------------------------------------------
+    Last Edited: June 18th 2019
+ */
+
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
@@ -10,6 +24,9 @@ public class Cropper {
 
     private Image img;
 
+    /**
+     * directions
+     */
     public enum directions {
         NORTHEAST,
         NORTHWEST,
@@ -17,20 +34,40 @@ public class Cropper {
         SOUTHWEST,
     }
 
+    /** Constructor with image
+     *
+     * @param img desired image
+     */
     public Cropper(Image img) {
         this.img = img;
     }
 
+    /** Sets image
+     *
+     * @param img desired image
+     */
     public void setImg(WritableImage img) {
         this.img = img;
     }
 
+    /** Crops and image and returns it
+     *
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @return
+     */
     public WritableImage crop(int x, int y, int width, int height){
         PixelReader w = img.getPixelReader();
         WritableImage newImg = new WritableImage(w, x, y, width, height);
         return newImg;
     }
 
+    /** Gets image
+     *
+     * @return image
+     */
     public Image getImg() {
         return img;
     }
@@ -42,10 +79,17 @@ public class Cropper {
      * @return a 2d Array list of Writable images cropped in rows left to right, and columns up to down
      */
     public ArrayList<ArrayList<WritableImage>> cropSpriteSheets(int width, int height){
+
         ArrayList<ArrayList<WritableImage>> textures = new ArrayList<>();
+
+        //initializes the pixel reader
         PixelReader w = img.getPixelReader();
+
+        //iterates through the rows
         for(int y = 0; y < Math.floor(img.getHeight()/height) * height; y+= height){
             ArrayList<WritableImage> row = new ArrayList<>();
+
+            //iterates through image
             for(int x = 0; x < Math.floor(img.getWidth()/width) * width; x+= width){
                 row.add(new WritableImage(w, x, y, width, height));
             }
@@ -69,6 +113,7 @@ public class Cropper {
         ArrayList<ArrayList<WritableImage>> textures = new ArrayList<>();
         PixelReader w = img.getPixelReader();
 
+        //edits parameters based on direction
         switch (dir){
             case NORTHEAST:
                 height = Math.abs(height) * -1;
@@ -89,6 +134,7 @@ public class Cropper {
         }
 
 
+        //Instead of doing it rows and then columns does columns and then rows
         if (reverseOrder){
             for(int x = startX; x < Math.floor(img.getHeight()/height) * height; x+= width){
                 ArrayList<WritableImage> row = new ArrayList<>();

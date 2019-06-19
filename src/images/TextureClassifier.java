@@ -1,17 +1,36 @@
 package images;
 
+/*
+    Project title: Lazer Cats vs Zombies Map Editor
+    -----------------------------------------------
+    ClassName: Texture Classifier
+    -----------------------------------------------
+    What it does: Classifies certain images into enums for easier and clearer access
+    -----------------------------------------------
+    For: ICS4U1 - Holik
+    -----------------------------------------------
+    By: Ethan and Allen
+    -----------------------------------------------
+    Last Edited: June 18th 2019
+ */
+
 import engine.Cropper;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
 import java.util.ArrayList;
 
+/** Classifies textures
+ *
+ */
 public class TextureClassifier {
 
     private static Cropper cropper = new Cropper(new Image("images/terrain.png"));
     private static ArrayList<ArrayList<WritableImage>> backgroundList = cropper.cropSpriteSheets(32,32);
 
-
+    /** Enum containing almost all the images in the terrain sprite sheet
+     *
+     */
     public enum BackgroundTiles {
 
         //Row 1
@@ -227,9 +246,18 @@ public class TextureClassifier {
             this.im = im;
         }
 
+        /** Gets image
+         *
+         * @return image
+         */
         public Image getImage() {
             return this.im;
         }
+
+        /** Gets id
+         *
+         * @return id
+         */
         public int getId(){
             return this.id;
         }

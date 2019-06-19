@@ -16,8 +16,8 @@
           <Menu mnemonicParsing="false" text="Options">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#menuClickHandler" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuClickHandler" text="Fill" />
                   <MenuItem mnemonicParsing="false" onAction="#menuClickHandler" text="Clear" />
-              <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
