@@ -1,5 +1,8 @@
 package engine.math;
 
+/**
+ *
+ */
 public class Vector2 {
 
     public double x;
